@@ -47,5 +47,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.4",
+    "@babel/preset-env": "^7.21.4",
+    "@babel/preset-typescript": "^7.21.4",
+    "@types/react-test-renderer": "^18.0.0",
+    "babel-jest": "^29.5.0",
+    "react-test-renderer": "^18.2.0"
   }
 }

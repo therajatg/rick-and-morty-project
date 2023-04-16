@@ -1,7 +1,7 @@
 import style from "./navbar.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSearchTerm } from "../../slices/characterSlice";
 
@@ -30,7 +30,7 @@ export const Navbar = () => {
   }, []);
 
   return (
-    <nav className={style.navContainer}>
+    <nav className={style.navContainer} data-testid="a">
       <Link
         to="/"
         className={style.logo}
@@ -58,32 +58,3 @@ export const Navbar = () => {
     </nav>
   );
 };
-
-{
-  /* <div>
-<div className={style.searchBar}>
-  <input
-    placeholder={placeholder}
-    className={style.searchInput}
-    onChange={(e) => getSearchData(e.target.value, setSearchResults)}
-  />
-  <AiOutlineSearch className={style.searchIcon} />
-</div>
-<div className={style.dropdownContent}>
-  {searchResults.map((result: any) => (
-    <option
-      value={result.name}
-      // onClick={(e) =>
-      //   dataDispatch({
-      //     type: "CATEGORY",
-      //     payload: e.target.value,
-      //   })
-      // }
-      key={result.id}
-    >
-      {result.name}
-    </option>
-  ))}
-</div>
-</div> */
-}

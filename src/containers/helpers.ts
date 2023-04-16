@@ -1,4 +1,5 @@
 import axios from "axios";
+// import axios from "./node_modules/axios/dist/axios.min.js";
 import { store } from "../store";
 import { updateCharacterData, updateInfo } from "../slices/characterSlice";
 
