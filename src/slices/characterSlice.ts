@@ -17,7 +17,6 @@ const characterSlice = createSlice({
       state.info = action.payload;
     },
     updateSearchTerm: (state, action) => {
-      console.log("action.payload", action.payload);
       state.searchTerm = action.payload;
     },
   },

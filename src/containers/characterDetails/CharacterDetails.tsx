@@ -48,7 +48,7 @@ export const CharacterDetails = () => {
         <img
           className={style.image}
           src={selectedCharacter.image}
-          alt="Image of the selected character"
+          alt="Selected Character"
         ></img>
         <h1>{selectedCharacter.name}</h1>
       </div>

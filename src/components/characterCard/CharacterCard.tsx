@@ -29,11 +29,7 @@ export const CharacterCard = ({
         )
       }
     >
-      <img
-        src={imageSource}
-        alt={`${name}'s image`}
-        className={style.cardImage}
-      />
+      <img src={imageSource} alt={`${name}`} className={style.cardImage} />
       <div>
         <p className={style.name}>{name}</p>
         <p>Species: {species}</p>

@@ -1,5 +1,4 @@
 import axios from "axios";
-// import axios from "./node_modules/axios/dist/axios.min.js";
 import { store } from "../store";
 import { updateCharacterData, updateInfo } from "../slices/characterSlice";
 
@@ -17,7 +16,6 @@ export const getAllCharacters = async (pageNumber: number) => {
         `https://rickandmortyapi.com/api/character/?page=${pageNumber}&name=${searchTermFromRedux}`
       );
       store.dispatch(updateInfo(response.data.info));
-      console.log("search response", response);
       return response.data.results;
     } catch {
       return [];
@@ -109,7 +107,6 @@ const fetchLocationDetails = async (url: string) => {
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    console.log("343233", error);
     return {
       dimension: "Dimension Not Found",
       residents: { length: "No Residents Found" },

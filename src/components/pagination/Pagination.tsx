@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   Pagination as PaginationComponent,
@@ -16,11 +16,8 @@ export const Pagination = ({ currentPageNumber }: Props) => {
   currentPageNumber = isNaN(currentPageNumber) ? 1 : currentPageNumber;
   const [pagesArray, setPagesArray] = useState<any>([]);
   const navigate = useNavigate();
-  const location = useLocation();
   const { searchTerm } = useParams();
   const { info } = useSelector((store: any) => store.character);
-
-  console.log("searchTerm", searchTerm);
 
   useEffect(() => {
     setPagesArray(getPagesArrayToDisplay(currentPageNumber, info.pages));
@@ -42,7 +39,10 @@ export const Pagination = ({ currentPageNumber }: Props) => {
         />
       </PaginationItem>
       {pagesArray.map((pageNumber: number) => (
-        <PaginationItem active={pageNumber === currentPageNumber}>
+        <PaginationItem
+          active={pageNumber === currentPageNumber}
+          key={pageNumber}
+        >
           <PaginationLink
             onClick={() => {
               if (searchTerm) {
