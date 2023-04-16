@@ -47,6 +47,27 @@
   margin-right: 0.5rem;
 }
 
+.dropdownContent {
+  position: absolute;
+  /* width: fit-content; */
+  /* background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--dropdown-category-background-color)
+  ); */
+  /* display: none; */
+  border-radius: 0.3rem;
+  background-color: var(--background-color);
+  width: 30vw;
+}
+
+/* .dropdown:hover .dropdownContent {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+} */
+
 @media screen and (max-width: 820px) {
   .navContainer {
     width: 100%;
@@ -61,6 +82,10 @@
   .searchBar {
     max-width: 80%;
   }
+
+  /* .dropdownContent {
+    max-width: 80%;
+  } */
 
   .searchInput {
     width: 100vw;

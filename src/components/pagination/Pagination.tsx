@@ -1,6 +1,6 @@
-import { useMemo, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
   Pagination as PaginationComponent,
   PaginationItem,
@@ -13,20 +13,29 @@ interface Props {
 }
 
 export const Pagination = ({ currentPageNumber }: Props) => {
-  const [pagesArray, setPagesArray] = useState<number[]>([]);
+  currentPageNumber = isNaN(currentPageNumber) ? 1 : currentPageNumber;
+  const [pagesArray, setPagesArray] = useState<any>([]);
   const navigate = useNavigate();
+  const location = useLocation();
+  const { searchTerm } = useParams();
+  const { info } = useSelector((store: any) => store.character);
+
+  console.log("searchTerm", searchTerm);
 
   useEffect(() => {
-    getPagesArrayToDisplay(currentPageNumber, setPagesArray);
-  }, [currentPageNumber]);
+    setPagesArray(getPagesArrayToDisplay(currentPageNumber, info.pages));
+  }, [currentPageNumber, info.pages]);
 
   return (
-    <PaginationComponent aria-label="Page navigation example">
+    <PaginationComponent>
       <PaginationItem>
         <PaginationLink
           previous
           onClick={() => {
             if (currentPageNumber > 1) {
+              if (searchTerm) {
+                navigate(`/${searchTerm}/page/${currentPageNumber - 1}`);
+              }
               navigate(`/page/${currentPageNumber - 1}`);
             }
           }}
@@ -34,7 +43,15 @@ export const Pagination = ({ currentPageNumber }: Props) => {
       </PaginationItem>
       {pagesArray.map((pageNumber: number) => (
         <PaginationItem active={pageNumber === currentPageNumber}>
-          <PaginationLink onClick={() => navigate(`/page/${pageNumber}`)}>
+          <PaginationLink
+            onClick={() => {
+              if (searchTerm) {
+                navigate(`/${searchTerm}/page/${pageNumber}`);
+              } else {
+                navigate(`/page/${pageNumber}`);
+              }
+            }}
+          >
             {pageNumber}
           </PaginationLink>
         </PaginationItem>
@@ -43,8 +60,12 @@ export const Pagination = ({ currentPageNumber }: Props) => {
         <PaginationLink
           next
           onClick={() => {
-            if (currentPageNumber < totalPagesArray.length) {
-              navigate(`/page/${currentPageNumber + 1}`);
+            if (currentPageNumber < info.pages) {
+              if (searchTerm) {
+                navigate(`/${searchTerm}/page/${currentPageNumber + 1}`);
+              } else {
+                navigate(`/page/${currentPageNumber + 1}`);
+              }
             }
           }}
         />

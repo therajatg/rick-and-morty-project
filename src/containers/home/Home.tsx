@@ -1,21 +1,22 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { getAllCharacters } from "../helpers";
-import { Pagination } from "../../components/pagination/Pagination";
+import { Pagination, AllCards } from "../../components/index";
 import style from "./home.module.css";
 import { useParams } from "react-router-dom";
-import { AllCards } from "../../components/allCards/AllCards";
+import { useSelector } from "react-redux";
 
 export const Home = () => {
   const [characterData, setCharacterData] = useState<{}[]>([]);
   const { pageNumber } = useParams();
+  const { searchTerm } = useSelector((store: any) => store.character);
 
   useEffect(() => {
-    setAllcharacters(Number(pageNumber) ?? 1);
-  }, [pageNumber]);
+    setAllCharacters(Number(pageNumber) ?? 1);
+  }, [pageNumber, searchTerm]);
 
-  const setAllcharacters = async (pageNumber: number) => {
+  const setAllCharacters = async (pageNumber: number) => {
     const response = await getAllCharacters(pageNumber);
-    setCharacterData(response.results);
+    setCharacterData(response);
   };
 
   return (
